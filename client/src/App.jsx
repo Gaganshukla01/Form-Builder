@@ -4,7 +4,6 @@ import { Route,Routes } from 'react-router-dom'
 import Login from './pages/Login'
 import ResetPassword from './pages/ResetPassword'
 import EmailVerify from './pages/EmailVerify'
-import Notes from './pages/Notes'
 import FormBuilderApp from './pages/BuilderPage'
 import PreviewFormPage from './pages/PreviewFormPage'
 import { ToastContainer} from 'react-toastify';
@@ -22,10 +21,8 @@ function App() {
         <Route path='/login' element={<Login/>}/>
         <Route path='/resetPassword' element={<ResetPassword/>}/>
         <Route path='/emailVerify' element={<EmailVerify/>}/>
-        <Route path='/notes' element={<Notes/>}/>
         <Route path="/builder/:id?" element={<FormBuilderApp />} />
         <Route path="/form/:shareId" element={<PreviewFormPage />} />
-
     </Routes>
     </FormProvider>
   

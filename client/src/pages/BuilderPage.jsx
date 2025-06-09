@@ -1,8 +1,8 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import {
-  FormPreview,
   FieldPropertiesPanel,
   DraggableField,
+  FormPreview
 } from "../components/FieldRenderer.jsx";
 import { defaultField } from "../context/FormContext.jsx";
 import { toast } from "react-toastify";
@@ -113,11 +113,9 @@ const FormBuilderApp = () => {
     e.preventDefault();
 
     if (draggedFieldType) {
-      // Check if insertFieldAtIndex exists and dropIndex is provided
       if (typeof insertFieldAtIndex === "function" && dropIndex !== null) {
         insertFieldAtIndex(draggedFieldType, currentStep, dropIndex);
       } else {
-        // Fallback to regular addField
         addField(draggedFieldType, currentStep);
       }
 
@@ -167,7 +165,7 @@ const FormBuilderApp = () => {
           setFormTitle(formData.title || "Imported Form");
           loadTemplate(formData);
         } catch (error) {
-          alert("Invalid form file");
+          toast.error("Invalid form file");
         }
       };
       reader.readAsText(file);
@@ -175,49 +173,16 @@ const FormBuilderApp = () => {
   };
 
   if (isPreview) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
-        <div className="bg-white/80 backdrop-blur-lg shadow-lg border-b border-white/20">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex justify-between items-center py-4">
-              <button
-                onClick={() => setIsPreview(false)}
-                className="flex items-center space-x-2 text-gray-600 hover:text-gray-800 transition-all duration-200 hover:scale-105"
-              >
-                <ChevronLeft className="w-4 h-4" />
-                <span>Back to Builder</span>
-              </button>
-
-              <div className="flex items-center space-x-4">
-                <div className="flex items-center space-x-2 bg-white/70 backdrop-blur-sm rounded-xl p-1 shadow-lg border border-white/30">
-                  <button
-                    onClick={() => setPreviewMode("desktop")}
-                    className={`p-2 rounded-lg transition-all duration-200 ${previewMode === "desktop" ? "bg-white shadow-md scale-105" : "hover:bg-white/50"}`}
-                  >
-                    <Monitor className="w-4 h-4" />
-                  </button>
-                  <button
-                    onClick={() => setPreviewMode("tablet")}
-                    className={`p-2 rounded-lg transition-all duration-200 ${previewMode === "tablet" ? "bg-white shadow-md scale-105" : "hover:bg-white/50"}`}
-                  >
-                    <Tablet className="w-4 h-4" />
-                  </button>
-                  <button
-                    onClick={() => setPreviewMode("mobile")}
-                    className={`p-2 rounded-lg transition-all duration-200 ${previewMode === "mobile" ? "bg-white shadow-md scale-105" : "hover:bg-white/50"}`}
-                  >
-                    <Smartphone className="w-4 h-4" />
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <FormPreview />
-      </div>
-    );
-  }
+  return (
+    <FormPreview 
+      steps={steps}
+      formTitle={formTitle}
+      previewMode={previewMode}
+      setPreviewMode={setPreviewMode}
+      setIsPreview={setIsPreview}
+    />
+  );
+}
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
@@ -298,7 +263,9 @@ const FormBuilderApp = () => {
                     navigator.clipboard.writeText(
                       `${window.location.origin}/form/${shareId}`
                     );
-                    alert("Share link copied to clipboard!");
+                    toast.success("Share link copied to clipboard!");
+                    
+
                   }}
                   className="flex items-center space-x-2 px-6 py-2 bg-gradient-to-r from-green-600 to-green-700 text-white rounded-xl hover:from-green-700 hover:to-green-800 shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105 border border-green-500/50"
                 >

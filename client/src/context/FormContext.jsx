@@ -104,7 +104,6 @@ export const FormProvider = ({ children }) => {
       createdAt: new Date().toISOString(),
     };
 
-    // Save to localStorage (replace with API call)
 
     const response = await axios.post(`${backend_url}/api/form/create`, {
       title: formTitle,
@@ -113,11 +112,6 @@ export const FormProvider = ({ children }) => {
     console.log(response);
     setFormId(response.data.id);
     setShareId(response.data.shareId);
-    alert(`Form saved! Share link ID: ${response.data.shareId}`);
-    // localStorage.setItem(`form_${formData.id}`, JSON.stringify(formData));
-    // setFormId(formData.id);x
-    // setShareId(formData.shareId);
-    // alert(`Form saved! Share ID: ${formData.shareId}`);
   };
 
   const loadTemplate = (template) => {
