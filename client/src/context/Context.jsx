@@ -36,7 +36,7 @@ export const AppContextProvider = (props) => {
             const { data } = await axios.get(`${backend_url}/api/user/data`);
             
             // Fixed typo: 'sucess' should be 'success'
-            if (data.success) {
+            if (data.sucess) {
                 setUserData(data.message);
             } else {
                 toast.error(data.message);
