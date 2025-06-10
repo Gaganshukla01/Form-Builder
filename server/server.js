@@ -8,12 +8,22 @@ import { userRoutes } from "./router/userRouter.js"
 import {notesRoute}  from "./router/noteRouter.js"
 import {formRoute}  from "./router/formRoutes.js"
 
-// const allowedOrigin=[process.env.FRONTED_URL]
+const allowedOrigin=[process.env.FRONTED_URL]
 const app=express()
 const port=process.env.PORT||4000
 
 app.use(express.json())
-app.use(cors({origin:true,credentials:true}))
+
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true,
+};
 app.use(cookieParser())
 
 connectDb()
