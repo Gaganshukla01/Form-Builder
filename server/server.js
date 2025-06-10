@@ -18,7 +18,7 @@ app.use(cookieParser())
 
 connectDb()
 // Api EndPoint
-app.get("/",(req,res)=>res.send("Api is Working"))
+app.get("/",(req,res)=>res.send("Backend is Working"))
 
 app.use("/api/auth",authRoute)
 app.use("/api/user",userRoutes)
