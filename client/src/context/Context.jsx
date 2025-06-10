@@ -8,7 +8,7 @@ export const AppContent = createContext();
 
 export const AppContextProvider = (props) => {
     const [isLoggedIn, setIsLoggedin] = useState(false);
-    const [userData, setUserData] = useState(null); // Changed from false to null
+    const [userData, setUserData] = useState(false);
     const [loading, setLoading] = useState(true); 
     const getAuthState = async () => {
         axios.defaults.withCredentials = true;
