@@ -8,26 +8,42 @@ import { userRoutes } from "./router/userRouter.js"
 import {notesRoute}  from "./router/noteRouter.js"
 import {formRoute}  from "./router/formRoutes.js"
 
-const allowedOrigins = [process.env.FRONTED_URL]
+const allowedOrigins = [
+  process.env.FRONTEND_URL,
+  'https://form-builder-pi-lime.vercel.app',
+  'http://localhost:3000', 
+  'http://localhost:5173', 
+]
 
 const app = express()
 const port = process.env.PORT || 4000
+
+// Add this for debugging on Vercel
+console.log('Allowed origins:', allowedOrigins)
+console.log('FRONTEND_URL from env:', process.env.FRONTEND_URL)
 
 app.use(express.json())
 
 const corsOptions = {
   origin: function (origin, callback) {
-    // Fixed: Using allowedOrigins instead of allowedOrigin
-    if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
-      callback(null, true);
+    console.log('Request origin:', origin) // Debug log
+    
+    
+    if (!origin) return callback(null, true)
+    
+    if (allowedOrigins.includes(origin)) {
+      callback(null, true)
     } else {
-      callback(new Error('Not allowed by CORS'));
+      console.log('CORS blocked origin:', origin)
+      callback(new Error('Not allowed by CORS'))
     }
   },
   credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'Cookie'],
 };
 
-// Apply CORS middleware with options
+
 app.use(cors(corsOptions))
 app.use(cookieParser())
 
