@@ -14,15 +14,13 @@ const allowedOrigins = [
   'http://localhost:5173', 
 ]
 
-
 const app=express()
 const port=process.env.PORT||4000
 
 app.use(express.json())
-
 const corsOptions = {
   origin: function (origin, callback) {
-    console.log('Request origin:', origin) // Debug log
+    console.log('Request origin:', origin) 
     
     
     if (!origin) return callback(null, true)
