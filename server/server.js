@@ -49,4 +49,4 @@ app.use("/api/form",formRoute)
 app.use("/api/formres",formRoute)
 
 
-app.listen(port,()=>console.log(`Server is running in port ${port}`))
+app.listen(port, () => console.log(`Server is running on port ${port}`))
