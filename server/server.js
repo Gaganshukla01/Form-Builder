@@ -8,9 +8,7 @@ import { userRoutes } from "./router/userRouter.js"
 import {notesRoute}  from "./router/noteRouter.js"
 import {formRoute}  from "./router/formRoutes.js"
 
-// Fixed: Changed FRONTED_URL to FRONTEND_URL (assuming env variable name)
-// and allowedOrigin to allowedOrigins (plural)
-const allowedOrigins = [process.env.FRONTEND_URL]
+const allowedOrigins = [process.env.FRONTED_URL]
 
 const app = express()
 const port = process.env.PORT || 4000
