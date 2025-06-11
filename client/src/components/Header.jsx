@@ -28,7 +28,7 @@ function Header() {
         Welcome to Form Builder
       </h2>
       <p className="mb-8 max-w-md">
-        Let's take a tour of the auth webApp and enjoy the stramless process
+        Let's take a tour of the Form Builder webApp and enjoy the stramless process
       </p>
       <button
         className="border border-gray-500 px-8 
